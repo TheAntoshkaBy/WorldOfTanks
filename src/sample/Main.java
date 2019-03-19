@@ -21,7 +21,8 @@ public class Main extends Application
         primaryStage.setTitle("WORLD OF TANKS");
         scene.getStylesheets().add(getClass().getResource("../sample/CssFiles/Menu.css").toExternalForm());
         primaryStage.setScene(scene);
-       // controller.setStage(primaryStage);
+        MenuController menuController = new MenuController();
+        menuController.setStage(primaryStage);
         primaryStage.show();
     }
 

@@ -1,5 +1,9 @@
 package sample.Game.Displays;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import sample.Game.MotionObjects.Element;
+
 import java.io.IOException;
 
 public class RepeatGame extends ParentGameDisplay {
@@ -17,6 +21,14 @@ public class RepeatGame extends ParentGameDisplay {
             }
         }
         return repeatGame;
+    }
+
+    @Override
+    protected void initContent(int level)
+    {
+        super.initContent(level);
+        Element bossTank = new Element(new ImageView(new Image(getClass().getResourceAsStream("../../Images/2.3.7.png"))),100,100, "UP");
+        appRoot.getChildren().add(bossTank);
     }
 
     private RepeatGame(int level) throws IOException {

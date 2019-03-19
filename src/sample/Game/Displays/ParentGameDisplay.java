@@ -5,13 +5,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.Level;
+import sample.Game.MotionObjects.Element;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 public class ParentGameDisplay extends Application
@@ -19,7 +22,7 @@ public class ParentGameDisplay extends Application
     /**Реализация паттерна Singleton*/
     private static ParentGameDisplay parentGameDisplay;
 
-    //Переменные работающие с нашим отображением
+    /**Переменные работающие с нашим отображением*/
     public Pane appRoot;
     public Pane gameRoot;
     public FXMLLoader loader;
@@ -28,9 +31,17 @@ public class ParentGameDisplay extends Application
     protected Scene scene;
     protected Image backGroundImg;
 
+
     /**Переменные работающая с контекстом игры*/
     final int blockSize;
 
+    /** Управляющие списки.*/
+    private HashMap<KeyCode,Boolean> keys = new java.util.HashMap<>();
+
+    protected boolean isPressed(KeyCode key)
+    {
+        return keys.getOrDefault(key,false);
+    }
     //метод предоставляющий доступ к нашему объекту.
     public static synchronized ParentGameDisplay getObject(int level){
 
@@ -57,7 +68,6 @@ public class ParentGameDisplay extends Application
         scene = new Scene(appRoot,width,height);
         this.blockSize = 55;
         backGroundImg = new Image(getClass().getResourceAsStream("../../Images/back.png"));
-
 
     }
 
@@ -99,7 +109,6 @@ public class ParentGameDisplay extends Application
     public void start(Stage stage) throws Exception
     {
 
-
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -108,10 +117,14 @@ public class ParentGameDisplay extends Application
 
 
         timer.start();
+        /**When key click */
+        scene.setOnKeyPressed(event -> keys.put(event.getCode(),true));
 
+        /**When key released*/
+        scene.setOnKeyReleased(event -> keys.put(event.getCode(),false));
         //отображение
         stage.setTitle("World Of Tanks");
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("../sample/Images/WoT.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("../../Images/WoT.png")));
         stage.setScene(scene);
         stage.show();
     }

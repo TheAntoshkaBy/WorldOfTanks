@@ -15,25 +15,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable
-{
+public class MenuController implements Initializable {
 
-    Stage stage;
-    @FXML Button out;
+    public static Stage stage;
+    @FXML
+    Button out;
 
 
-    /** Create a new window for the game action**/
+    /**
+     * Create a new window for the game action
+     **/
 
     public void NewGame(ActionEvent actionEvent) throws Exception {
         Stage stage = new Stage();
         MainGame.getObject(0).start(stage);
     }
 
-    public void Multipleer(ActionEvent actionEvent)throws Exception
-    {
-      Stage stage = new Stage();
-      MultipleGame.getObject(1).start(stage);
+    public void Multipleer(ActionEvent actionEvent) throws Exception {
+        Stage stage = new Stage();
+        MultipleGame.getObject(1).start(stage);
     }
+
     public void Records(ActionEvent actionEvent) throws Exception {
 
 
@@ -44,8 +46,11 @@ public class MenuController implements Initializable
     }
 
     public void setStage(Stage stage) {
+
         this.stage = stage;
+        System.out.println(stage);
     }
+
     public void Settings(ActionEvent actionEvent) throws IOException {
        /* Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/FXML/Settings.fxml"));
@@ -68,11 +73,9 @@ public class MenuController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        out.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.close();
-            }
+        out.setOnAction(event -> {
+            System.out.println(stage);
+            this.stage.close();
         });
     }
 }
