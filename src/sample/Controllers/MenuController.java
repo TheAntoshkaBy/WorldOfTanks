@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import sample.Game.Displays.MainGame;
 import sample.Game.Displays.MultipleGame;
 import sample.Game.Displays.RepeatGame;
+import sample.Main;
 
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class MenuController implements Initializable {
 
     public void NewGame(ActionEvent actionEvent) throws Exception {
         Stage stage = new Stage();
-        MainGame.getObject(0).start(stage);
+        MainGame.getNewObject(0).start(stage);
     }
 
     public void Multipleer(ActionEvent actionEvent) throws Exception {

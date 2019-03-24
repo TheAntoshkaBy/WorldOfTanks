@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-public class ParentGameDisplay extends Application
+abstract public class ParentGameDisplay extends Application
 {
     /**Реализация паттерна Singleton*/
     private static ParentGameDisplay parentGameDisplay;
@@ -30,6 +30,9 @@ public class ParentGameDisplay extends Application
     protected final int  height;
     protected Scene scene;
     protected Image backGroundImg;
+    protected AnimationTimer timer;
+    protected Element element;
+    protected int speed;
 
 
     /**Переменные работающая с контекстом игры*/
@@ -43,19 +46,6 @@ public class ParentGameDisplay extends Application
         return keys.getOrDefault(key,false);
     }
     //метод предоставляющий доступ к нашему объекту.
-    public static synchronized ParentGameDisplay getObject(int level){
-
-        if(parentGameDisplay == null)
-        {
-            try {
-                parentGameDisplay = new ParentGameDisplay(level);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return parentGameDisplay;
-    }
 
     protected ParentGameDisplay(int level) throws IOException {
         //Установка основной сцены
