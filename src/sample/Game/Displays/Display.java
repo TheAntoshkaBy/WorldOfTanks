@@ -9,18 +9,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import sample.Controllers.MenuController;
 import sample.Game.InitContent.InitBlocks;
-import sample.Game.Level;
+import sample.Game.LevelContent.Level;
 import sample.Game.MotionObjects.Element;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 
-abstract public class ParentGameDisplay extends Application
+abstract public class Display extends Application
 {
     /**Реализация паттерна Singleton*/
-    private static ParentGameDisplay parentGameDisplay;
+    private static Display parentGameDisplay;
 
     /**Переменные работающие с нашим отображением*/
     public Pane appRoot;
@@ -33,6 +34,8 @@ abstract public class ParentGameDisplay extends Application
     protected AnimationTimer timer;
     protected Element element;
     protected int speed;
+    protected Stage menuStage;
+    protected Stage mainStage;
 
 
     /**Переменные работающая с контекстом игры*/
@@ -47,17 +50,18 @@ abstract public class ParentGameDisplay extends Application
     }
     //метод предоставляющий доступ к нашему объекту.
 
-    protected ParentGameDisplay(int level) throws IOException {
+    protected Display(int level) throws IOException {
         //Установка основной сцены
         this.width = 1920;
         this.height = 1045;
-        this.loader = new FXMLLoader(getClass().getResource("../../FXMLs/PlayScreen.fxml"));
+        this.menuStage = MenuController.getStage();
+        this.loader = new FXMLLoader(getClass().getResource("../../../FXMLs/PlayScreen.fxml"));
         appRoot = new Pane();
         appRoot = (Pane) loader.load();
         gameRoot = new Pane();
         scene = new Scene(appRoot,width,height);
         this.blockSize = 55;
-        backGroundImg = new Image(getClass().getResourceAsStream("../../Images/back.png"));
+        backGroundImg = new Image(getClass().getResourceAsStream("../../../Images/back.png"));
 
     }
 
@@ -109,14 +113,14 @@ abstract public class ParentGameDisplay extends Application
         timer.start();
         /**When key click */
         scene.setOnKeyPressed(event -> keys.put(event.getCode(),true));
-
+        this.mainStage = stage;
         /**When key released*/
         scene.setOnKeyReleased(event -> keys.put(event.getCode(),false));
         //отображение
-        stage.setTitle("World Of Tanks");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("../../Images/WoT.png")));
-        stage.setScene(scene);
-        stage.show();
+        this.mainStage.setTitle("World Of Tanks");
+        this.mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../../../Images/WoT.png")));
+        this.mainStage.setScene(scene);
+        this.mainStage.show();
     }
 
 }

@@ -1,14 +1,13 @@
-package sample.Game.Displays;
+package sample.Game.Displays.GameDisplays;
 
-import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import sample.Game.Displays.WaitClickDisplays;
 import sample.Game.MotionObjects.Element;
 
 import java.io.IOException;
 
-    public class MultipleGame extends FatherMainAndMultipleDisplays {
+    public class MultipleGame extends WaitClickDisplays {
 
         private static MultipleGame multipleGame;
 
@@ -34,7 +33,7 @@ import java.io.IOException;
 
         private MultipleGame(int level) throws IOException {
         super(level);
-        element = new Element(new ImageView(new Image(getClass().getResourceAsStream("../../Images/2.3.7.png"))), 900,100, "UP");
+        element = new Element(new ImageView(new Image(getClass().getResourceAsStream("../../../Images/2.3.7.png"))), 900,100, "UP");
         speed = 10;
         initContent(level);
     }

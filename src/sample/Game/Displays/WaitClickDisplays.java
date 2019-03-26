@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-abstract public class FatherMainAndMultipleDisplays extends ParentGameDisplay{
+abstract public class WaitClickDisplays extends Display{
 
-    protected FatherMainAndMultipleDisplays(int level) throws IOException {
+    protected WaitClickDisplays(int level) throws IOException {
         super(level);
     }
 
@@ -45,7 +45,11 @@ abstract public class FatherMainAndMultipleDisplays extends ParentGameDisplay{
 
         } else if (isPressed(KeyCode.SPACE)) {
 
-        } else {
+        } else if (isPressed(KeyCode.ESCAPE)){
+            timer.stop();
+            mainStage.close();
+            menuStage.show();
+        }else {
             element.animation.stop();
         }
 

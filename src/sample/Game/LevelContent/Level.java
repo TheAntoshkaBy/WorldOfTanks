@@ -1,4 +1,4 @@
-package sample.Game;
+package sample.Game.LevelContent;
 
 
 public class Level {

@@ -1,15 +1,13 @@
 package sample.Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.Game.Displays.MainGame;
-import sample.Game.Displays.MultipleGame;
-import sample.Game.Displays.RepeatGame;
-import sample.Main;
+import sample.Game.Displays.GameDisplays.MainGame;
+import sample.Game.Displays.GameDisplays.MultipleGame;
+import sample.Game.Displays.GameDisplays.RepeatGame;
 
 
 import java.io.IOException;
@@ -30,9 +28,10 @@ public class MenuController implements Initializable {
     public void NewGame(ActionEvent actionEvent) throws Exception {
         Stage stage = new Stage();
         MainGame.getNewObject(0).start(stage);
+        this.stage.close();
     }
 
-    public void Multipleer(ActionEvent actionEvent) throws Exception {
+    public void Multiple(ActionEvent actionEvent) throws Exception {
         Stage stage = new Stage();
         MultipleGame.getObject(1).start(stage);
     }
@@ -49,7 +48,11 @@ public class MenuController implements Initializable {
     public void setStage(Stage stage) {
 
         this.stage = stage;
-        System.out.println(stage);
+    }
+
+    public static Stage getStage()
+    {
+        return stage;
     }
 
     public void Settings(ActionEvent actionEvent) throws IOException {
@@ -75,7 +78,6 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         out.setOnAction(event -> {
-            System.out.println(stage);
             this.stage.close();
         });
     }

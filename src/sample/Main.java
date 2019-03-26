@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.Controllers.MenuController;
 
@@ -20,6 +21,7 @@ public class Main extends Application
         Scene scene = new Scene(root, 1024, 600);
         primaryStage.setTitle("WORLD OF TANKS");
         scene.getStylesheets().add(getClass().getResource("../sample/CssFiles/Menu.css").toExternalForm());
+        primaryStage.getIcons().addAll(new Image(getClass().getResourceAsStream("Images/WoT.png")));
         primaryStage.setScene(scene);
         MenuController menuController = new MenuController();
         menuController.setStage(primaryStage);

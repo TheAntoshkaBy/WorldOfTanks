@@ -38,7 +38,7 @@
                                                 <Insets bottom="30.0" left="409.0" top="40.0" />
                                             </VBox.margin>
                                         </Button>
-                                        <Button mnemonicParsing="false" onAction="#Multipleer" prefHeight="35.0" prefWidth="206.0" text="Мультиплеер">
+                                        <Button mnemonicParsing="false" onAction="#Multiple" prefHeight="35.0" prefWidth="206.0" text="Мультиплеер">
                                             <VBox.margin>
                                                 <Insets bottom="30.0" left="409.0" top="40.0" />
                                             </VBox.margin>

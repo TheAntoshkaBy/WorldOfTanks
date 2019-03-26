@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import sample.Animation.SpriteAnimation;
-import sample.Game.Displays.ParentGameDisplay;
 
 public class Element extends Pane implements MotionObjects {
 
@@ -27,7 +26,6 @@ public class Element extends Pane implements MotionObjects {
     ImageView imageView;
 
     public SpriteAnimation animation;
-
 
 
     public Element(ImageView imageView,double x, double y, String handle)
@@ -51,7 +49,6 @@ public class Element extends Pane implements MotionObjects {
         this.meaning = handle;
 
     }
-
 
     public void moveX(int x, Element element)
     {
@@ -89,16 +86,7 @@ public class Element extends Pane implements MotionObjects {
             /**End check of element*/
             this.setTranslateX(this.getTranslateX() + (movingRight ? 1 : -1));
         }
-
-
-
-
-
-
-
     }
-
-
 
     public void moveY(int y, Element element)
     {
@@ -141,6 +129,7 @@ public class Element extends Pane implements MotionObjects {
 
     @Override
     public void setElementInDisplay(int x, int y) {
-
+        this.setTranslateX(x);
+        this.setTranslateY(y);
     }
 }
