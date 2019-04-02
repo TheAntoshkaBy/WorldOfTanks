@@ -3,7 +3,7 @@ package sample.Game.Displays.GameDisplays;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.Game.Displays.WaitClickDisplays;
-import sample.Game.MotionObjects.Element;
+import sample.Game.MotionObjects.MotionTank;
 
 import java.io.IOException;
 
@@ -28,12 +28,12 @@ import java.io.IOException;
         protected void initContent(int level)
         {
             super.initContent(level);
-            appRoot.getChildren().add(element);
+            appRoot.getChildren().add(motionTank);
         }
 
         private MultipleGame(int level) throws IOException {
         super(level);
-        element = new Element(new ImageView(new Image(getClass().getResourceAsStream("../../../Images/2.3.7.png"))), 900,100, "UP");
+        motionTank = new MotionTank(900,100, "UP");
         speed = 10;
         initContent(level);
     }

@@ -3,6 +3,7 @@ package sample.Game.Displays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import sample.Game.MotionObjects.Bullet;
 
 import java.io.IOException;
 
@@ -21,36 +22,36 @@ abstract public class WaitClickDisplays extends Display{
              * 2. Заносим номер итерации в список чисел
              *
              * */
-            element.animation.play();
-            element.animation.setOffsetY(261);
-            element.moveY(-speed,element);
+            motionTank.animation.play();
+            motionTank.animation.setOffsetY(261);
+            motionTank.moveY(-speed);
             //sideOfTank = "UP";
 
         } else if (isPressed(KeyCode.DOWN)) {
-            element.animation.play();
-            element.animation.setOffsetY(0);
-            element.moveY(speed,element);
+            motionTank.animation.play();
+            motionTank.animation.setOffsetY(0);
+            motionTank.moveY(speed);
 
         } else if (isPressed(KeyCode.RIGHT)) {
-            element.animation.play();
-            element.animation.setOffsetY(87);
-            element.moveX(speed,element);
+            motionTank.animation.play();
+            motionTank.animation.setOffsetY(87);
+            motionTank.moveX(speed);
             //sideOfTank = "RIGHT";
 
         } else if (isPressed(KeyCode.LEFT)) {
-            element.animation.play();
-            element.animation.setOffsetY(174);
-            element.moveX(-speed,element);
+            motionTank.animation.play();
+            motionTank.animation.setOffsetY(174);
+            motionTank.moveX(-speed);
             //sideOfTank = "LEFT";
 
         } else if (isPressed(KeyCode.SPACE)) {
-
+            Bullet bullet = new Bullet(motionTank.getTranslateX(),motionTank.getTranslateY(),motionTank.getMeaning());
         } else if (isPressed(KeyCode.ESCAPE)){
             timer.stop();
             mainStage.close();
             menuStage.show();
         }else {
-            element.animation.stop();
+            motionTank.animation.stop();
         }
 
     }

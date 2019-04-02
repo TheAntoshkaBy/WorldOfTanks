@@ -12,9 +12,12 @@ import javafx.scene.Scene;
 import sample.Controllers.MenuController;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.LevelContent.Level;
-import sample.Game.MotionObjects.Element;
+import sample.Game.MotionObjects.Bullet;
+import sample.Game.MotionObjects.MotionTank;
+
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -24,16 +27,25 @@ abstract public class Display extends Application
     private static Display parentGameDisplay;
 
     /**Переменные работающие с нашим отображением*/
-    public Pane appRoot;
-    public Pane gameRoot;
+    public static Pane appRoot;
+    public static Pane gameRoot;
+
     public FXMLLoader loader;
+
     protected final int width;
     protected final int  height;
+
     protected Scene scene;
+
     protected Image backGroundImg;
+
     protected AnimationTimer timer;
-    protected Element element;
+
+    protected MotionTank motionTank;
+    protected ArrayList<Bullet> bullets = new ArrayList<>();
+
     protected int speed;
+
     protected Stage menuStage;
     protected Stage mainStage;
 
