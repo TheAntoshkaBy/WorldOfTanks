@@ -3,17 +3,24 @@ package sample.Game.Displays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import sample.Game.MotionObjects.Bullet;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.Bullet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 abstract public class WaitClickDisplays extends Display{
 
+    public static ArrayList<Bullet> bullets;
+
     protected WaitClickDisplays(int level) throws IOException {
         super(level);
+        bullets = new ArrayList<>();
     }
 
     public void update() throws IOException {
+
+        for(int i = 0;  i< bullets.size();i++)
+            bullets.get(i).Go();
 
 
         if (isPressed(KeyCode.UP)) {
@@ -22,30 +29,42 @@ abstract public class WaitClickDisplays extends Display{
              * 2. Заносим номер итерации в список чисел
              *
              * */
-            motionTank.animation.play();
-            motionTank.animation.setOffsetY(261);
+            motionTank.setMeaning("Up");
             motionTank.moveY(-speed);
+            if (isPressed(KeyCode.SPACE))
+            {
+                motionTank.fire();
+            }
             //sideOfTank = "UP";
 
         } else if (isPressed(KeyCode.DOWN)) {
-            motionTank.animation.play();
-            motionTank.animation.setOffsetY(0);
+            motionTank.setMeaning("Down");
             motionTank.moveY(speed);
+            if (isPressed(KeyCode.SPACE))
+            {
+                motionTank.fire();
+            }
 
         } else if (isPressed(KeyCode.RIGHT)) {
-            motionTank.animation.play();
-            motionTank.animation.setOffsetY(87);
+            motionTank.setMeaning("Right");
             motionTank.moveX(speed);
+            if (isPressed(KeyCode.SPACE))
+            {
+                motionTank.fire();
+            }
             //sideOfTank = "RIGHT";
 
         } else if (isPressed(KeyCode.LEFT)) {
-            motionTank.animation.play();
-            motionTank.animation.setOffsetY(174);
+            motionTank.setMeaning("Left");
             motionTank.moveX(-speed);
+            if (isPressed(KeyCode.SPACE))
+            {
+                motionTank.fire();
+            }
             //sideOfTank = "LEFT";
 
         } else if (isPressed(KeyCode.SPACE)) {
-            Bullet bullet = new Bullet(motionTank.getTranslateX(),motionTank.getTranslateY(),motionTank.getMeaning());
+            motionTank.fire();
         } else if (isPressed(KeyCode.ESCAPE)){
             timer.stop();
             mainStage.close();

@@ -1,11 +1,11 @@
 package sample.Game.Displays.GameDisplays;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.Game.Displays.WaitClickDisplays;
-import sample.Game.MotionObjects.Bullet;
-import sample.Game.MotionObjects.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.Bullet;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
+import sample.Game.MotionObjects.Motions.MotionObject;
 
 import java.io.IOException;
 
@@ -53,9 +53,17 @@ public class MainGame extends WaitClickDisplays {
     @Override
     protected void initContent(int level) {
         super.initContent(level);
-        appRoot.getChildren().addAll(motionTank);
+        BotTank firstBot = new BotTank(100,100,"Right");
+        tanks.add(firstBot);
+        appRoot.getChildren().addAll(motionTank,firstBot);
     }
 
 
+    @Override
+    public void update() throws IOException {
+        super.update();
+        for(int i = 0;i<tanks.size();i++)
+            tanks.get(i).goAlgorithm();
 
+    }
 }

@@ -1,13 +1,9 @@
 package sample.Game.Displays.GameDisplays;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import sample.Game.Displays.Display;
-import sample.Game.Displays.WaitClickDisplays;
-import sample.Game.MotionObjects.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
 
 
-import java.io.DataInputStream;
 import java.io.IOException;
 
 public class RepeatGame extends Display {

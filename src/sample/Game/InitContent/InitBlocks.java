@@ -4,6 +4,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import sample.Game.Displays.Display;
 
 public class InitBlocks extends Pane {
 
@@ -33,7 +34,7 @@ public class InitBlocks extends Pane {
         }
 
         getChildren().add(block);
-        //ParentGameDisplay.platforms.add(this);
+        Display.blocks.add(this);
         //ParentGameDisplay.gameRoot.getChildren().add(this);
 //        getChildren().add(block);
     }

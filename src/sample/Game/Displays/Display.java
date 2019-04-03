@@ -12,8 +12,8 @@ import javafx.scene.Scene;
 import sample.Controllers.MenuController;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.LevelContent.Level;
-import sample.Game.MotionObjects.Bullet;
-import sample.Game.MotionObjects.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
 
 
 import java.io.IOException;
@@ -42,9 +42,9 @@ abstract public class Display extends Application
     protected AnimationTimer timer;
 
     protected MotionTank motionTank;
-    protected ArrayList<Bullet> bullets = new ArrayList<>();
-
-    protected int speed;
+    public static ArrayList<InitBlocks> blocks = new ArrayList<>();
+    public static ArrayList<BotTank> tanks = new ArrayList<>();
+    public static int speed;
 
     protected Stage menuStage;
     protected Stage mainStage;
@@ -109,7 +109,6 @@ abstract public class Display extends Application
 
         appRoot.getChildren().addAll(backGround,gameRoot);
     }
-
 
     @Override
     public void start(Stage stage) throws Exception
