@@ -10,6 +10,7 @@ public class InitBlocks extends Pane {
 
     Image blockImg;
     ImageView block;
+    public static double blockSize;
 
     public enum BlockType{
         PLATFORM,BRICK
@@ -20,6 +21,7 @@ public class InitBlocks extends Pane {
         block = new ImageView(blockImg);
         block.setFitWidth(55);
         block.setFitHeight(55);
+        blockSize = 55;
         setTranslateX(x);
         setTranslateY(y);
 

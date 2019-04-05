@@ -12,8 +12,8 @@ import javafx.scene.Scene;
 import sample.Controllers.MenuController;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.LevelContent.Level;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.BotTank;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.MotionTank;
 
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ abstract public class Display extends Application
 
     protected AnimationTimer timer;
 
-    protected MotionTank motionTank;
+    public static MotionTank motionTank;
     public static ArrayList<InitBlocks> blocks = new ArrayList<>();
     public static ArrayList<BotTank> tanks = new ArrayList<>();
     public static int speed;

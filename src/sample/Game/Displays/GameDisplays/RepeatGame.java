@@ -1,7 +1,7 @@
 package sample.Game.Displays.GameDisplays;
 
 import sample.Game.Displays.Display;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.MotionTank;
 
 
 import java.io.IOException;

@@ -1,15 +1,15 @@
 package sample.Game.MotionObjects.Motions;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import sample.Animation.SpriteAnimation;
 import sample.Game.Displays.Display;
+import sample.Game.Displays.WaitClickDisplays;
+import sample.Game.InitContent.InitBlocks;
 import sample.Game.MotionObjects.MotionObjects;
 
-public class MotionObject extends Pane implements MotionObjects
+public abstract class MotionObject extends Pane implements MotionObjects
 {
     protected int columns;//кол-во столбцов в спрайтовой картинке
     protected int count;//количество картинок
@@ -23,10 +23,11 @@ public class MotionObject extends Pane implements MotionObjects
     protected boolean ifLife;
     protected String meaning;
     protected String side;
+    protected ImageView tankView;
 
     public SpriteAnimation animation;
 
-    public MotionObject(String handle)
+    public MotionObject(double x, double y, String handle)
     {
         this.columns = 4;
         this.count = 3;
@@ -47,21 +48,21 @@ public class MotionObject extends Pane implements MotionObjects
         this.animation.play();
         boolean movingRight = x>0;
         for(int i = 0;i<Math.abs(x);i++) {
-            for(Node platform : Display.blocks) {
-                if((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
-                    if (!movingRight) {
-                        collisionReaction();
-                        this.setTranslateX(this.getTranslateX() + 1);//отталкивает нас от стены
-                        this.animation.stop();
-                        return;
-                    } else {
-                        collisionReaction();
-                        this.setTranslateX(this.getTranslateX() - 1);
-                        this.animation.stop();
-                        return;
-                    }
+
+            if(ifBlockCollision(false,movingRight) || ifTankCollision(false,movingRight) || ifActionCollision(false,movingRight) || ifBulletCollision(false,movingRight)) {
+                if (!movingRight) {
+                    collisionReaction();
+                    this.setTranslateX(this.getTranslateX() + 1);//отталкивает нас от стены
+                    this.animation.stop();
+                    return;
+                } else {
+                    collisionReaction();
+                    this.setTranslateX(this.getTranslateX() - 1);
+                    this.animation.stop();
+                    return;
                 }
             }
+
             objectAnimation();
             this.setTranslateX(this.getTranslateX() + (movingRight ? 1 : -1));
         }
@@ -73,24 +74,125 @@ public class MotionObject extends Pane implements MotionObjects
         this.animation.play();
         boolean movingDown = y > 0;
         for (int i = 0; i < Math.abs(y); i++) {
-            for (Node platform : Display.blocks) {
-                if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
-                    if (!movingDown) {
-                        this.setTranslateY(this.getTranslateY() + 1);
-                        collisionReaction();
-                        this.animation.stop();
-                        return;
-                    } else {
-                        collisionReaction();
-                        this.setTranslateY(this.getTranslateY() - 1);
-                        this.animation.stop();
-                        return;
-                    }
+
+            if(ifBlockCollision(true,!movingDown) || ifTankCollision(true,!movingDown) || ifActionCollision(true,!movingDown) || ifBulletCollision(true,!movingDown)) {
+                if (!movingDown) {
+                    this.setTranslateY(this.getTranslateY() + 1);
+                    collisionReaction();
+                    this.animation.stop();
+                    return;
+                } else {
+                    collisionReaction();
+                    this.setTranslateY(this.getTranslateY() - 1);
+                    this.animation.stop();
+                    return;
                 }
+
             }
             objectAnimation();
             this.setTranslateY(this.getTranslateY() + (movingDown ? 1 : -1));
         }
+    }
+
+    //Объект движимый всегда - Object, объект в который движемся - платформа
+    protected double getObjectPosition(boolean XY, boolean side)
+    {
+        if (XY) {
+            if(side)
+            {
+                return this.getTranslateY();
+            }else{
+               return this.getTranslateY() + this.width;
+                }
+        }else {
+            if(side)
+            {
+                return this.getTranslateX() + this.width;
+            }else
+            {
+                return this.getTranslateX();
+            }
+
+        }
+    }
+    protected double getPlatformPosition(boolean XY, boolean side, double sizeOfPlatform, Node platform)
+    {
+        if (XY) {
+            if(side)
+            {
+                return platform.getTranslateY() + sizeOfPlatform;
+            }else{
+                return platform.getTranslateY();
+            }
+        }else {
+            if(side)
+            {
+                return platform.getTranslateX();
+            }else
+            {
+                return platform.getTranslateX() + sizeOfPlatform;
+            }
+
+        }
+    }
+    //if up == XY == true && side == true Down == XY == true && side == false Left == XY == false && side == false Right == XY == false && side == true
+    protected boolean ifBlockCollision(boolean XY,boolean side)
+    {
+        double objectPosition = 0, platformPosition = 0;
+        for (Node platform : Display.blocks) {
+            objectPosition = getObjectPosition(XY,side);
+            platformPosition = getPlatformPosition(XY,side,InitBlocks.blockSize,platform);
+            if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
+                if(objectPosition == platformPosition) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    protected boolean ifTankCollision(boolean XY,boolean side)
+    {
+        double objectPosition = 0, platformPosition = 0;
+        for (Node platform : Display.tanks) {
+            objectPosition = getObjectPosition(XY,side);
+            platformPosition = getPlatformPosition(XY,side,87,platform);
+            if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
+                if(objectPosition == platformPosition) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    protected boolean ifActionCollision(boolean XY,boolean side)
+    {
+        double objectPosition = 0, platformPosition = 0;
+        objectPosition = getObjectPosition(XY,side);
+        platformPosition = getPlatformPosition(XY,side,width,Display.motionTank);
+        if ((this.getBoundsInParent().intersects(Display.motionTank.getBoundsInParent()))) {
+            if(objectPosition == platformPosition) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean ifBulletCollision(boolean XY,boolean side)
+    {
+        double objectPosition = 0, platformPosition = 0;
+        for (Node platform : WaitClickDisplays.bullets) {
+            objectPosition = getObjectPosition(XY,side);
+            platformPosition = getPlatformPosition(XY,side,width,platform);
+            if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
+                if(objectPosition == platformPosition) {
+                    System.out.println("Collision");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

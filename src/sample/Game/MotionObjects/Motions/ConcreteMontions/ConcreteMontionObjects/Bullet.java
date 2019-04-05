@@ -1,4 +1,4 @@
-package sample.Game.MotionObjects.Motions.ConcreteMontions;
+package sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ public class Bullet extends MotionObject
     final ImageView bulletView;
 
     public Bullet(double x, double y, String handle) {
-        super(handle);
+        super(x,y,handle);
         switch (meaning)
         {
             case "Left":
@@ -42,7 +42,7 @@ public class Bullet extends MotionObject
                 offsetX = 40;
             }
         }
-        bulletView = new ImageView(new Image(getClass().getResourceAsStream("../../../../Images/bullet2.png")));
+        bulletView = new ImageView(new Image(getClass().getResourceAsStream("../../../../../Images/bullet2.png")));
         bulletView.setViewport(new Rectangle2D(offsetX,offsetY,width,height));
         animation = new SpriteAnimation(bulletView, Duration.millis(500),count,columns,offsetX,offsetY,width,height);
         getChildren().addAll(bulletView);
@@ -74,6 +74,9 @@ public class Bullet extends MotionObject
         Display.appRoot.getChildren().remove(this);
         WaitClickDisplays.bullets.remove(this);
     }
+
+
+
 
     @Override
     public void objectAnimation()

@@ -2,10 +2,9 @@ package sample.Game.Displays.GameDisplays;
 
 import javafx.scene.layout.Pane;
 import sample.Game.Displays.WaitClickDisplays;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.BotTank;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.Bullet;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.MotionTank;
-import sample.Game.MotionObjects.Motions.MotionObject;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.MotionTank;
 
 import java.io.IOException;
 

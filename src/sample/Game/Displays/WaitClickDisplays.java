@@ -3,7 +3,7 @@ package sample.Game.Displays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import sample.Game.MotionObjects.Motions.ConcreteMontions.Bullet;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
 
 import java.io.IOException;
 import java.util.ArrayList;

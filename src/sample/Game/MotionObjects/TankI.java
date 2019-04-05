@@ -1,5 +1,5 @@
 package sample.Game.MotionObjects;
 
-public interface Tank {
+public interface TankI {
     void fire();
 }
