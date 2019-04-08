@@ -8,6 +8,10 @@ import sample.Game.Displays.Display;
 import sample.Game.Displays.WaitClickDisplays;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.MotionObjects.MotionObjects;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.MotionTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.Tank;
 
 public abstract class MotionObject extends Pane implements MotionObjects
 {
@@ -19,7 +23,7 @@ public abstract class MotionObject extends Pane implements MotionObjects
     protected int height;//длинна картинки
     protected final int widthScreen;
     protected final int heightScreen;
-    protected int lifes;
+    protected int life;
     protected boolean ifLife;
     protected String meaning;
     protected String side;
@@ -37,10 +41,14 @@ public abstract class MotionObject extends Pane implements MotionObjects
         this.height = 40;
         this.widthScreen = 1470;
         this.heightScreen = 765;
-        this.lifes = 3;
+        this.life = 3;
         this.ifLife = true;
         this.meaning = handle;
 
+    }
+
+    public boolean isIfLife() {
+        return ifLife;
     }
 
     public void moveX(int x)
@@ -159,6 +167,13 @@ public abstract class MotionObject extends Pane implements MotionObjects
             platformPosition = getPlatformPosition(XY,side,87,platform);
             if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
                 if(objectPosition == platformPosition) {
+                    if(this instanceof Bullet)
+                    {
+                        BotTank botTank = (BotTank) platform;
+                        botTank.life--;
+                        if(botTank.life<=0)
+                            botTank.ifLife = false;
+                    }
                     return true;
                 }
             }
@@ -173,6 +188,12 @@ public abstract class MotionObject extends Pane implements MotionObjects
         platformPosition = getPlatformPosition(XY,side,width,Display.motionTank);
         if ((this.getBoundsInParent().intersects(Display.motionTank.getBoundsInParent()))) {
             if(objectPosition == platformPosition) {
+                if(this instanceof Bullet)
+                {
+                    Display.motionTank.life--;
+                    if(Display.motionTank.life<=0)
+                        Display.motionTank.ifLife = false;
+                }
                 return true;
             }
         }
@@ -187,7 +208,6 @@ public abstract class MotionObject extends Pane implements MotionObjects
             platformPosition = getPlatformPosition(XY,side,width,platform);
             if ((this.getBoundsInParent().intersects(platform.getBoundsInParent()))) {
                 if(objectPosition == platformPosition) {
-                    System.out.println("Collision");
                     return true;
                 }
             }

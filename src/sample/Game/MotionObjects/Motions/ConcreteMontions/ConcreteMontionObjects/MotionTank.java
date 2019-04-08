@@ -17,6 +17,7 @@ public class MotionTank extends Tank implements TankI {
     {
         super(x, y, handle);
         setTankOnScreen();
+        life = 4;
     }
 
 

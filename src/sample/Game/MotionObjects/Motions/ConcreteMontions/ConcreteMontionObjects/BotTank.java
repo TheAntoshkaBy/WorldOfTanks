@@ -11,29 +11,52 @@ import sample.Game.MotionObjects.Motions.ConcreteMontions.Tank;
 
 public class BotTank extends Tank {
 
-    boolean ifCollision;
+    boolean ifUpper;
+    boolean ifRighter;
+    String nextStep;
 
     public BotTank(double x, double y, String handle) {
         super(x,y,handle);
-        ifCollision = false;
-        this.setMeaning("left");
+        ifUpper = false;
+        ifRighter = false;
+        this.setMeaning("Down");
         setTankOnScreen();
+        life = 1;
+        nextStep = "Down";
     }
 
     public void goAlgorithm()
     {
-        if(!ifCollision)
+        System.out.println(nextStep + "  " +meaning);
+        switch (nextStep)
         {
-            this.setMeaning("Down");
+            case"Down": {
             moveY(Display.speed);
-        }
-        else
-        {
-            this.setMeaning("Up");
-            moveY(-Display.speed);
+            this.meaning = "Down";
+            }break;
+
+            case "Up":
+            {
+                moveY(-Display.speed);
+                this.meaning = "Up";
+            }break;
+
+            case "Right":
+
+            {
+                moveX(Display.speed);
+                this.meaning = "Right";
+            }break;
+
+            case "Left":
+            {
+                moveX(-Display.speed);
+                this.meaning = "Left";
+            }break;
         }
         setDuration(700);
         fire();
+
     }
 
 
@@ -46,14 +69,28 @@ public class BotTank extends Tank {
         MainGame.getGameRoot().getChildren().add(this);
     }
 
-
+//определяем движение танка
     @Override
     public void collisionReaction() {
         super.collisionReaction();
-        if(ifCollision)
-            ifCollision = false;
-                    else
-                        ifCollision =true;
+        System.out.println("Collision!!!");
+        switch (meaning)
+        {
+            case"Down":
+                nextStep = "Up";
+                break;
 
+            case "Up":
+                nextStep = "Right";
+                break;
+
+            case "Right":
+                nextStep = "Left";
+                break;
+
+            case "Left":
+                nextStep = "Down";
+                break;
+        }
     }
 }

@@ -19,26 +19,26 @@ public class Bullet extends MotionObject
         {
             case "Left":
             {
-                this.setTranslateX(x - 60);
+                this.setTranslateX(x);
                 this.setTranslateY(y+17);
                 offsetX = 120;
             }break;
             case "Right":
             {
-                this.setTranslateX(x + 100);
+                this.setTranslateX(x + 80);
                 this.setTranslateY(y + 23);
                 offsetX = 0;
             }break;
             case "Up":
             {
                 this.setTranslateX(x + 23);
-                this.setTranslateY(y - 50);
+                this.setTranslateY(y);
                 offsetX = 80;
             }break;
             case "Down":
             {
                 this.setTranslateX(x + 23);
-                this.setTranslateY(y + 100);
+                this.setTranslateY(y + 80);
                 offsetX = 40;
             }
         }

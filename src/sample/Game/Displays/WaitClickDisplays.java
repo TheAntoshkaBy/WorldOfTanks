@@ -3,14 +3,14 @@ package sample.Game.Displays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import sample.Animation.DestroyPicture;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.BotTank;
 import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 abstract public class WaitClickDisplays extends Display{
-
-    public static ArrayList<Bullet> bullets;
 
     protected WaitClickDisplays(int level) throws IOException {
         super(level);
@@ -19,9 +19,35 @@ abstract public class WaitClickDisplays extends Display{
 
     public void update() throws IOException {
 
+        if(!motionTank.isIfLife())
+        {
+            destroys.add(new DestroyPicture(motionTank.getTranslateX(),motionTank.getTranslateY()));
+            appRoot.getChildren().remove(motionTank);
+            timer.stop();
+            mainStage.close();
+            menuStage.show();
+        }
+        for(int i = 0;i<tanks.size();i++)
+        {
+            if(!tanks.get(i).isIfLife())
+            {
+                BotTank bot = tanks.get(i);
+                destroys.add(new DestroyPicture(bot.getTranslateX(),bot.getTranslateY()));
+                appRoot.getChildren().remove(bot);
+                tanks.remove(i);
+            }
+        }
+
         for(int i = 0;  i< bullets.size();i++)
             bullets.get(i).Go();
 
+        for(int i = 0;i<destroys.size();i++)
+        {
+            if(destroys.get(i).getTimer().isTime())
+            {
+                destroys.get(i).remove();
+            }
+        }
 
         if (isPressed(KeyCode.UP)) {
             /*

@@ -9,10 +9,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import sample.Animation.DestroyPicture;
 import sample.Controllers.MenuController;
 import sample.Game.InitContent.InitBlocks;
 import sample.Game.LevelContent.Level;
 import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.BotTank;
+import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
 import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.MotionTank;
 
 
@@ -44,6 +46,8 @@ abstract public class Display extends Application
     public static MotionTank motionTank;
     public static ArrayList<InitBlocks> blocks = new ArrayList<>();
     public static ArrayList<BotTank> tanks = new ArrayList<>();
+    public static ArrayList<Bullet> bullets;
+    public static ArrayList<DestroyPicture> destroys = new ArrayList<>();//В КОНСТРУКТОР!!!
     public static int speed;
 
     protected Stage menuStage;
@@ -87,7 +91,10 @@ abstract public class Display extends Application
     {
         ImageView backGround = new ImageView(backGroundImg);
         int levelNumber = level;
-
+        bullets.clear();
+        tanks.clear();
+        blocks.clear();
+        appRoot.getChildren().removeAll();
         backGround.setFitHeight(19 * blockSize);
         backGround.setFitWidth(36 * blockSize);
 

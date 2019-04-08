@@ -1,5 +1,6 @@
 package sample.Game.MotionObjects.Motions.ConcreteMontions;
 
+import sample.Animation.Timer;
 import sample.Game.Displays.WaitClickDisplays;
 import sample.Game.MotionObjects.Motions.ConcreteMontions.ConcreteMontionObjects.Bullet;
 import sample.Game.MotionObjects.Motions.MotionObject;
@@ -10,7 +11,7 @@ public abstract class Tank extends MotionObject implements TankI {
     protected long timerStart;
     protected long timerFinish;
     protected long timerDuration;
-
+    protected Timer timer;
     public Tank(double x, double y, String handle) {
         super(x, y, handle);
         this.columns = 3;
@@ -24,6 +25,7 @@ public abstract class Tank extends MotionObject implements TankI {
         timerFinish = 0;
         timerStart = 0;
         timerDuration = 500;
+        timer = new Timer(500);
     }
 
     protected void setDuration(long timerDuration)
@@ -31,21 +33,6 @@ public abstract class Tank extends MotionObject implements TankI {
         this.timerDuration = timerDuration;
     }
 
-    public boolean timer()
-    {
-        if(timerStart == 0)
-        {
-            timerStart = System.currentTimeMillis();
-            timerFinish = timerStart+timerDuration;
-            return true;
-        }else if(timerFinish <= System.currentTimeMillis())
-        {
-            timerStart = 0;
-            return true;
-        }else
-            return false;
-
-    }
 
     //Прописываем направление картинки/движимого объекта если дело касается танка
     @Override
@@ -71,7 +58,7 @@ public abstract class Tank extends MotionObject implements TankI {
     @Override
     public void fire() {
 
-        if(timer())
+        if(timer.isTime())
             WaitClickDisplays.bullets.add(new Bullet(getTranslateX(),getTranslateY(),getMeaning()));
         //создаем снаряд на карте, добавляем его в список движимых снарядов.
 
