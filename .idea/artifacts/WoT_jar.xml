@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WoT:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WoT_jar</output-path>
+    <root id="archive" name="WoT.jar">
+      <element id="module-output" name="WoT" />
+    </root>
+  </artifact>
+</component>
